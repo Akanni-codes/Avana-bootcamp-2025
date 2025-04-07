@@ -34,6 +34,13 @@ public class User {
         this.name = name;
     }
 
+    public Object getId() {
+        return id;
+    }
+    public void setId(String name) {
+        this.id = id;
+    }
+
     public Account getAccount() {
         return account;
     }
@@ -66,13 +73,5 @@ public class User {
         this.news = news;
     }
 
-
-    public void setId(Object id) {
-        this.id = (Long) id;
-    }
-
-    public Object getId() {
-        return id;
-    }
 }
 

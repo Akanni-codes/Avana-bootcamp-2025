@@ -23,6 +23,9 @@ public class Account {
     private BigDecimal limit;
 
     // Getters and Setters
+    public Object getId() {
+        return Id;
+    }
     public String getNumber() {
         return number;
     }
