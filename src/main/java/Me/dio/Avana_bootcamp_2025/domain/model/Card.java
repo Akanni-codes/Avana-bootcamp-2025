@@ -9,7 +9,7 @@ public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long getId;
+    private Long id;
 
     @Column (unique = true)
     private String number;

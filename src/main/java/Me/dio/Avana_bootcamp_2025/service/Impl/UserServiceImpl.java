@@ -1,4 +1,4 @@
-package Me.dio.Avana_bootcamp_2025.service.Impi;
+package Me.dio.Avana_bootcamp_2025.service.Impl;
 
 import Me.dio.Avana_bootcamp_2025.domain.model.Repository.UserRepository;
 import Me.dio.Avana_bootcamp_2025.domain.model.User;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.NoSuchElementException;
 
 @Service
-public class UserServiceImpi implements Userservice {
+public class UserServiceImpl implements Userservice {
 
     private final UserRepository userRepository;
 
-    public UserServiceImpi(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

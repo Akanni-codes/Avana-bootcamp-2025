@@ -67,5 +67,12 @@ public class User {
     }
 
 
+    public void setId(Object id) {
+        this.id = (Long) id;
+    }
+
+    public Object getId() {
+        return id;
+    }
 }
 
