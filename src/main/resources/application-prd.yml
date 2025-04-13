@@ -1,12 +1,17 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${PGUSER}
-    password: ${PGPASSWORD}
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: Akanni@1335
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: update  # ou 'create' ou 'none' dependendo do seu caso
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  flyway:
+    enabled: true  # Se estiver usando Flyway para migrações de banco de dados
