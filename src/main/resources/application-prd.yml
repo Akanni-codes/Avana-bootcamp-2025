@@ -5,6 +5,14 @@ spring:
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+
+  hikari:
+   connection-timeout: 30000  # Timeout para a conexão
+   max-lifetime: 60000  # Tempo máximo para uma conexão ser mantida no pool
+   maximum-pool-size: 10  # Número máximo de conexões no pool
+   idle-timeout: 30000  # Timeout para conexões ociosas
+
+
   jpa:
     hibernate:
       ddl-auto: update
