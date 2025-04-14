@@ -1,8 +1,9 @@
 package Me.dio.Avana_bootcamp_2025.persistence;
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,22 +14,25 @@ import static lombok.AccessLevel.PRIVATE;
 public class ConnectionUtil {
 
     public static Connection getConnection() throws SQLException {
-        // Lê as variáveis de ambiente (com prefixo DB_)
-        String host = System.getenv("DB_HOST");
-        String port = System.getenv("DB_PORT");
-        String database = System.getenv("DB_NAME");
-        String user = System.getenv("DB_USER");
-        String password = System.getenv("DB_PASSWORD");
+        try {
+            String dbUrl = System.getenv("DB_URL"); // formato: mysql://user:pass@host:port/database
+            URI uri = new URI(dbUrl.replace("mysql", "http")); // para conseguir usar URI parser
 
-        // Constrói a URL de conexão JDBC
-        String url = String.format(
-                "jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC",
-                host,
-                port,
-                database
-        );
+            String userInfo = uri.getUserInfo(); // user:password
+            String[] credentials = userInfo.split(":");
+            String user = credentials[0];
+            String password = credentials[1];
 
-        // Retorna a conexão
-        return DriverManager.getConnection(url, user, password);
+            String host = uri.getHost();
+            int port = uri.getPort();
+            String db = uri.getPath().substring(1); // remove o '/'
+
+            String jdbcUrl = String.format("jdbc:mysql://%s:%d/%s?useSSL=false&serverTimezone=UTC", host, port, db);
+
+            return DriverManager.getConnection(jdbcUrl, user, password);
+
+        } catch (URISyntaxException e) {
+            throw new SQLException("Erro ao interpretar DB_URL", e);
+        }
     }
 }
